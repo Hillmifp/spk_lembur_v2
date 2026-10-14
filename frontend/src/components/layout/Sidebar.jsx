@@ -16,7 +16,9 @@ import {
 
     FaChevronRight,
 
-    FaFileSignature
+    FaFileSignature,
+    FaClipboardCheck,
+    FaBookOpen
 
 } from "react-icons/fa";
 
@@ -49,6 +51,10 @@ function Sidebar({
             icon:<FaFileAlt/>
 
         },
+
+        { title:"Checker Persuratan", path:"/checker-persuratan", icon:<FaClipboardCheck/> },
+
+        { title:"Pustaka Referensi", path:"/pustaka-referensi", icon:<FaBookOpen/> },
 
         {
 

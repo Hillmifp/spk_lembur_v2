@@ -10,6 +10,8 @@ import Dashboard from "./pages/Dashboard";
 import GenerateSPK from "./pages/GenerateSPK";
 import History from "./pages/History";
 import Statistik from "./pages/Statistik";
+import CheckerPersuratan from "./pages/CheckerPersuratan";
+import PustakaReferensi from "./pages/PustakaReferensi";
 
 function App() {
   return (
@@ -19,6 +21,9 @@ function App() {
           path="/"
           element={<Dashboard />}
         />
+
+        <Route path="/checker-persuratan" element={<CheckerPersuratan />} />
+        <Route path="/pustaka-referensi" element={<PustakaReferensi />} />
 
         <Route
           path="/generate"

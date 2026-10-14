@@ -27,6 +27,12 @@ from services.database_service import (
 )
 
 from collections import Counter, defaultdict
+from flask import abort
+from services.checker_service import init_checker_table, list_checks, create_check, get_check, update_check, get_stored_file
+from services.reference_service import (
+    init_reference_tables, list_references, create_reference, get_reference,
+    delete_reference, list_rules, create_rule, update_rule, paragraph_insights, audit_for
+)
 
 # ==========================================
 # APP
@@ -35,6 +41,8 @@ from collections import Counter, defaultdict
 app = Flask(__name__)
 
 CORS(app)
+init_checker_table()
+init_reference_tables()
 
 # ==========================================
 # HOME
@@ -489,6 +497,132 @@ def statistik():
         "bulan": bulan_data
 
     })
+
+
+# ==========================================
+# CHECKER PERSURATAN
+# ==========================================
+
+@app.route("/api/checker", methods=["GET"])
+def api_checker_list():
+    return jsonify(list_checks())
+
+@app.route("/api/checker", methods=["POST"])
+def api_checker_create():
+    if "file" not in request.files:
+        return jsonify({"success": False, "error": "File dokumen belum dipilih."}), 400
+    try:
+        result = create_check(request.form, request.files["file"])
+        return jsonify({"success": True, "data": result}), 201
+    except ValueError as exc:
+        return jsonify({"success": False, "error": str(exc)}), 400
+    except Exception:
+        app.logger.exception("Gagal membuat pemeriksaan persuratan")
+        return jsonify({"success": False, "error": "Dokumen gagal diproses. Periksa format file atau log server."}), 500
+
+@app.route("/api/checker/<int:check_id>", methods=["GET"])
+def api_checker_detail(check_id):
+    result = get_check(check_id)
+    if not result:
+        return jsonify({"success": False, "error": "Data pemeriksaan tidak ditemukan."}), 404
+    return jsonify(result)
+
+@app.route("/api/checker/<int:check_id>", methods=["PUT"])
+def api_checker_update(check_id):
+    data = request.get_json(silent=True) or {}
+    try:
+        result = update_check(check_id, data)
+        if not result:
+            return jsonify({"success": False, "error": "Data pemeriksaan tidak ditemukan."}), 404
+        return jsonify({"success": True, "data": result})
+    except ValueError as exc:
+        return jsonify({"success": False, "error": str(exc)}), 400
+
+@app.route("/api/checker/<int:check_id>/file", methods=["GET"])
+def api_checker_download(check_id):
+    result = get_stored_file(check_id)
+    if not result or not result[0].is_file():
+        return jsonify({"success": False, "error": "File tidak ditemukan."}), 404
+    return send_file(result[0], as_attachment=True, download_name=result[1])
+
+# ==========================================
+# SMART PERSURATAN: REFERENCE LIBRARY & RULES
+# ==========================================
+
+@app.route("/api/references", methods=["GET"])
+def api_reference_list():
+    return jsonify(list_references())
+
+@app.route("/api/references", methods=["POST"])
+def api_reference_create():
+    if "file" not in request.files:
+        return jsonify({"success": False, "error": "Pilih dokumen final yang sudah disetujui."}), 400
+    try:
+        result = create_reference(request.form, request.files["file"])
+        return jsonify({"success": True, "data": result}), 201
+    except ValueError as exc:
+        return jsonify({"success": False, "error": str(exc)}), 400
+    except Exception:
+        app.logger.exception("Gagal menambahkan dokumen referensi")
+        return jsonify({"success": False, "error": "Dokumen referensi gagal diproses. Periksa format file dan log server."}), 500
+
+@app.route("/api/references/<int:reference_id>", methods=["GET"])
+def api_reference_detail(reference_id):
+    result = get_reference(reference_id)
+    if not result:
+        return jsonify({"success": False, "error": "Dokumen referensi tidak ditemukan."}), 404
+    return jsonify(result)
+
+@app.route("/api/references/<int:reference_id>", methods=["DELETE"])
+def api_reference_delete(reference_id):
+    if not delete_reference(reference_id):
+        return jsonify({"success": False, "error": "Dokumen referensi tidak ditemukan."}), 404
+    return jsonify({"success": True})
+
+@app.route("/api/references/<int:reference_id>/file", methods=["GET"])
+def api_reference_file(reference_id):
+    from services.reference_service import _connect
+    with _connect() as conn:
+        row = conn.execute("SELECT stored_path,attachment_name FROM reference_documents WHERE id=?", (reference_id,)).fetchone()
+    if not row or not os.path.isfile(row["stored_path"]):
+        return jsonify({"success": False, "error": "File referensi tidak ditemukan."}), 404
+    return send_file(row["stored_path"], as_attachment=True, download_name=row["attachment_name"])
+
+@app.route("/api/reference-insights", methods=["GET"])
+def api_reference_insights():
+    ref_id = request.args.get("reference_id", type=int)
+    return jsonify(paragraph_insights(ref_id))
+
+@app.route("/api/rules", methods=["GET"])
+def api_rules_list():
+    return jsonify(list_rules())
+
+@app.route("/api/rules", methods=["POST"])
+def api_rule_create():
+    try:
+        return jsonify({"success": True, "data": create_rule(request.get_json(silent=True) or {})}), 201
+    except ValueError as exc:
+        return jsonify({"success": False, "error": str(exc)}), 400
+    except Exception:
+        app.logger.exception("Gagal membuat aturan persuratan")
+        return jsonify({"success": False, "error": "Aturan gagal disimpan."}), 500
+
+@app.route("/api/rules/<int:rule_id>", methods=["PUT"])
+def api_rule_update(rule_id):
+    try:
+        result = update_rule(rule_id, request.get_json(silent=True) or {})
+        if not result:
+            return jsonify({"success": False, "error": "Aturan tidak ditemukan."}), 404
+        return jsonify({"success": True, "data": result})
+    except ValueError as exc:
+        return jsonify({"success": False, "error": str(exc)}), 400
+
+@app.route("/api/audit-log", methods=["GET"])
+def api_audit_log():
+    entity_type = request.args.get("entity_type")
+    entity_id = request.args.get("entity_id", type=int)
+    limit = request.args.get("limit", default=100, type=int)
+    return jsonify(audit_for(entity_type, entity_id, limit))
 
 # ==========================================
 # RUN
