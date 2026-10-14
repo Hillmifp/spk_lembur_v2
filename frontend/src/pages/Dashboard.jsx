@@ -1,17 +1,16 @@
-import {
-  useEffect,
-  useState
-} from "react";
+import { useEffect, useState } from "react";
 
-import Layout from "../components/Layout";
-import StatCard from "../components/StatCard";
+import Layout from "../components/layout/Layout";
+import StatCard from "../components/common/StatCard";
 import api from "../services/api";
 
+import "../styles/dashboard.css";
+
 import {
-  FaFileAlt,
-  FaCalendarAlt,
-  FaUsers,
-  FaHashtag
+    FaFileAlt,
+    FaCalendarAlt,
+    FaUsers,
+    FaHashtag
 } from "react-icons/fa";
 
 function Dashboard() {

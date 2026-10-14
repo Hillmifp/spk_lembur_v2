@@ -1,0 +1,406 @@
+/* ===========================================================
+   SPK LEMBUR
+   THEME
+=========================================================== */
+
+:root{
+
+    /* =======================================================
+       COLORS
+    ======================================================= */
+
+    --primary:#2563eb;
+    --primary-hover:#1d4ed8;
+
+    --secondary:#64748b;
+
+    --success:#22c55e;
+    --warning:#f59e0b;
+    --danger:#ef4444;
+    --info:#06b6d4;
+
+    /* =======================================================
+       BACKGROUND
+    ======================================================= */
+
+    --bg-color:#f4f7fb;
+
+    --sidebar-bg:#ffffff;
+
+    --topbar-bg:#ffffff;
+
+    --card-color:#ffffff;
+
+    --border-color:#e5e7eb;
+
+    /* =======================================================
+       TEXT
+    ======================================================= */
+
+    --heading-color:#111827;
+
+    --text-color:#374151;
+
+    --text-light:#94a3b8;
+
+    --text-white:#ffffff;
+
+    /* =======================================================
+       SHADOW
+    ======================================================= */
+
+    --shadow:
+
+        0 10px 30px
+
+        rgba(15,23,42,.08);
+
+    --shadow-hover:
+
+        0 20px 45px
+
+        rgba(15,23,42,.12);
+
+    /* =======================================================
+       BORDER RADIUS
+    ======================================================= */
+
+    --radius-xs:6px;
+
+    --radius-sm:10px;
+
+    --radius-md:16px;
+
+    --radius-lg:22px;
+
+    --radius-xl:30px;
+
+    /* =======================================================
+       TRANSITION
+    ======================================================= */
+
+    --transition:
+
+        all .25s ease;
+
+    /* =======================================================
+       SIDEBAR
+    ======================================================= */
+
+    --sidebar-width:260px;
+
+    --sidebar-collapse:82px;
+
+    /* =======================================================
+       TOPBAR
+    ======================================================= */
+
+    --topbar-height:74px;
+
+    /* =======================================================
+       CONTENT
+    ======================================================= */
+
+    --content-padding:28px;
+
+    /* =======================================================
+       ICON
+    ======================================================= */
+
+    --icon-size:22px;
+
+    /* =======================================================
+       Z INDEX
+    ======================================================= */
+
+    --z-sidebar:1000;
+
+    --z-topbar:900;
+
+    --z-modal:9999;
+
+}
+
+/* ===========================================================
+   DARK MODE
+=========================================================== */
+
+body.dark{
+
+    --bg-color:#0f172a;
+
+    --sidebar-bg:#111827;
+
+    --topbar-bg:#111827;
+
+    --card-color:#1e293b;
+
+    --border-color:#334155;
+
+    --heading-color:#f8fafc;
+
+    --text-color:#cbd5e1;
+
+    --text-light:#94a3b8;
+
+    --shadow:
+
+        0 10px 35px
+
+        rgba(0,0,0,.35);
+
+}
+
+/* ===========================================================
+   BUTTON COLORS
+=========================================================== */
+
+.btn-primary{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--primary-hover);
+
+}
+
+.btn-success{
+
+    background:var(--success);
+
+    color:white;
+
+}
+
+.btn-danger{
+
+    background:var(--danger);
+
+    color:white;
+
+}
+
+.btn-warning{
+
+    background:var(--warning);
+
+    color:white;
+
+}
+
+.btn-secondary{
+
+    background:var(--secondary);
+
+    color:white;
+
+}
+
+/* ===========================================================
+   BADGE
+=========================================================== */
+
+.badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:.75rem;
+
+    font-weight:600;
+
+}
+
+.badge-success{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+.badge-warning{
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+}
+
+.badge-danger{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+
+.badge-info{
+
+    background:#cffafe;
+
+    color:#155e75;
+
+}
+
+/* ===========================================================
+   CARD
+=========================================================== */
+
+.card-hover{
+
+    transition:var(--transition);
+
+}
+
+.card-hover:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:var(--shadow-hover);
+
+}
+
+/* ===========================================================
+   LINK
+=========================================================== */
+
+.link{
+
+    color:var(--primary);
+
+    transition:var(--transition);
+
+}
+
+.link:hover{
+
+    color:var(--primary-hover);
+
+}
+
+/* ===========================================================
+   DIVIDER
+=========================================================== */
+
+.divider{
+
+    width:100%;
+
+    height:1px;
+
+    background:var(--border-color);
+
+}
+
+/* ===========================================================
+   STATUS COLORS
+=========================================================== */
+
+.text-primary{
+
+    color:var(--primary);
+
+}
+
+.text-success{
+
+    color:var(--success);
+
+}
+
+.text-danger{
+
+    color:var(--danger);
+
+}
+
+.text-warning{
+
+    color:var(--warning);
+
+}
+
+.text-info{
+
+    color:var(--info);
+
+}
+
+/* ===========================================================
+   BACKGROUND COLORS
+=========================================================== */
+
+.bg-primary{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+.bg-success{
+
+    background:var(--success);
+
+    color:white;
+
+}
+
+.bg-danger{
+
+    background:var(--danger);
+
+    color:white;
+
+}
+
+.bg-warning{
+
+    background:var(--warning);
+
+    color:white;
+
+}
+
+.bg-info{
+
+    background:var(--info);
+
+    color:white;
+
+}
+
+/* ===========================================================
+   SCROLLBAR (DARK MODE)
+=========================================================== */
+
+body.dark ::-webkit-scrollbar-track{
+
+    background:#0f172a;
+
+}
+
+body.dark ::-webkit-scrollbar-thumb{
+
+    background:#475569;
+
+}
+
+body.dark ::-webkit-scrollbar-thumb:hover{
+
+    background:#64748b;
+
+}

@@ -1,0 +1,600 @@
+/* ==========================================================
+   TOPBAR
+   SPK LEMBUR V2
+========================================================== */
+
+.topbar{
+
+    position:sticky;
+
+    top:0;
+
+    left:0;
+
+    right:0;
+
+    height:var(--topbar-height);
+
+    background:var(--topbar-bg);
+
+    border-bottom:1px solid var(--border-color);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 28px;
+
+    z-index:900;
+
+    transition:all .3s ease;
+
+    backdrop-filter:blur(10px);
+
+}
+
+/* ==========================================================
+   LEFT
+========================================================== */
+
+.topbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.menu-toggle{
+
+    width:44px;
+
+    height:44px;
+
+    border-radius:12px;
+
+    border:none;
+
+    background:#f3f6fb;
+
+    color:var(--heading-color);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.menu-toggle:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+/* ==========================================================
+   PAGE TITLE
+========================================================== */
+
+.page-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.page-info h2{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    color:var(--heading-color);
+
+}
+
+.page-info p{
+
+    margin-top:3px;
+
+    font-size:13px;
+
+    color:var(--text-light);
+
+}
+
+/* ==========================================================
+   RIGHT
+========================================================== */
+
+.topbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+/* ==========================================================
+   SEARCH
+========================================================== */
+
+.search-box{
+
+    position:relative;
+
+}
+
+.search-box input{
+
+    width:260px;
+
+    height:42px;
+
+    padding-left:44px;
+
+    padding-right:16px;
+
+    border-radius:14px;
+
+    border:1px solid var(--border-color);
+
+    background:#f8fafc;
+
+    transition:.25s;
+
+    color:var(--heading-color);
+
+}
+
+.search-box input:focus{
+
+    border-color:var(--primary);
+
+    background:white;
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+
+}
+
+.search-icon{
+
+    position:absolute;
+
+    left:16px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    font-size:17px;
+
+    color:var(--text-light);
+
+}
+
+/* ==========================================================
+   ICON BUTTON
+========================================================== */
+
+.topbar-icon{
+
+    width:44px;
+
+    height:44px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    position:relative;
+
+    background:#f3f6fb;
+
+    transition:.25s;
+
+}
+
+.topbar-icon:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+/* ==========================================================
+   NOTIFICATION
+========================================================== */
+
+.notification-dot{
+
+    position:absolute;
+
+    top:9px;
+
+    right:10px;
+
+    width:10px;
+
+    height:10px;
+
+    background:#ef4444;
+
+    border-radius:50%;
+
+    border:2px solid white;
+
+}
+
+/* ==========================================================
+   USER
+========================================================== */
+
+.user-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    cursor:pointer;
+
+    padding:6px;
+
+    border-radius:14px;
+
+    transition:.25s;
+
+}
+
+.user-box:hover{
+
+    background:#f8fafc;
+
+}
+
+.user-avatar{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        #60a5fa
+    );
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-weight:700;
+
+    font-size:17px;
+
+    flex-shrink:0;
+
+}
+
+.user-detail{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.user-name{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:var(--heading-color);
+
+}
+
+.user-role{
+
+    font-size:12px;
+
+    color:var(--text-light);
+
+}
+
+/* ==========================================================
+   BREADCRUMB
+========================================================== */
+
+.breadcrumb{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:13px;
+
+    color:var(--text-light);
+
+}
+
+.breadcrumb span{
+
+    color:var(--heading-color);
+
+    font-weight:500;
+
+}
+
+/* ==========================================================
+   DIVIDER
+========================================================== */
+
+.topbar-divider{
+
+    width:1px;
+
+    height:28px;
+
+    background:var(--border-color);
+
+}
+
+/* ==========================================================
+   SHADOW
+========================================================== */
+
+.topbar.shadow{
+
+    box-shadow:0 8px 24px rgba(15,23,42,.08);
+
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media(max-width:992px){
+
+    .search-box{
+
+        display:none;
+
+    }
+
+    .user-detail{
+
+        display:none;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .topbar{
+
+        padding:0 16px;
+
+    }
+
+    .page-info p{
+
+        display:none;
+
+    }
+
+    .page-info h2{
+
+        font-size:18px;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .topbar{
+
+        height:64px;
+
+        padding:0 12px;
+
+    }
+
+    .topbar-right{
+
+        gap:10px;
+
+    }
+
+    .topbar-icon{
+
+        width:40px;
+
+        height:40px;
+
+    }
+
+    .menu-toggle{
+
+        width:40px;
+
+        height:40px;
+
+    }
+
+}
+
+/* ==========================================================
+   DARK MODE
+========================================================== */
+
+body.dark .topbar{
+
+    background:#111827;
+
+    border-color:#1f2937;
+
+}
+
+body.dark .menu-toggle{
+
+    background:#1f2937;
+
+    color:#e5e7eb;
+
+}
+
+body.dark .menu-toggle:hover{
+
+    background:var(--primary);
+
+}
+
+body.dark .topbar-icon{
+
+    background:#1f2937;
+
+    color:#e5e7eb;
+
+}
+
+body.dark .topbar-icon:hover{
+
+    background:var(--primary);
+
+}
+
+body.dark .search-box input{
+
+    background:#1f2937;
+
+    border-color:#374151;
+
+    color:white;
+
+}
+
+body.dark .search-box input:focus{
+
+    background:#111827;
+
+}
+
+body.dark .user-box:hover{
+
+    background:#1f2937;
+
+}
+
+body.dark .notification-dot{
+
+    border-color:#111827;
+
+}
+
+/* ==========================================================
+   ANIMATION
+========================================================== */
+
+.topbar{
+
+    animation:slideTop .35s ease;
+
+}
+
+@keyframes slideTop{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-12px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+/* ==========================================================
+   DATE
+========================================================== */
+
+.topbar-date{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-end;
+
+    margin-right:10px;
+
+}
+
+.date-title{
+
+    font-size:13px;
+
+    font-weight:600;
+
+    color:var(--heading-color);
+
+}
+
+.date-time{
+
+    font-size:12px;
+
+    color:var(--text-light);
+
+}
+
+@media(max-width:992px){
+
+    .topbar-date{
+
+        display:none;
+
+    }
+
+}

@@ -1,0 +1,436 @@
+/* ===========================================================
+   SPK LEMBUR
+   LAYOUT
+=========================================================== */
+
+/* ===========================================================
+   APP
+=========================================================== */
+
+.app{
+
+    display:flex;
+
+    min-height:100vh;
+
+    width:100%;
+
+    background:var(--bg-color);
+
+}
+
+/* ===========================================================
+   MAIN CONTENT
+=========================================================== */
+
+.main{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    min-width:0;
+
+    margin-left:var(--sidebar-width);
+
+    transition:var(--transition);
+
+}
+
+/* ===========================================================
+   COLLAPSED SIDEBAR
+=========================================================== */
+
+.main.collapsed{
+
+    margin-left:var(--sidebar-collapse);
+
+}
+
+/* ===========================================================
+   PAGE CONTENT
+=========================================================== */
+
+.content{
+
+    flex:1;
+
+    padding:var(--content-padding);
+
+    background:var(--bg-color);
+
+    animation:fadePage .35s ease;
+
+}
+
+/* ===========================================================
+   PAGE WRAPPER
+=========================================================== */
+
+.page{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+/* ===========================================================
+   PAGE HEADER
+=========================================================== */
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.page-title{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    color:var(--heading-color);
+
+}
+
+.page-subtitle{
+
+    margin-top:6px;
+
+    color:var(--text-light);
+
+    font-size:14px;
+
+}
+
+/* ===========================================================
+   GRID
+=========================================================== */
+
+.grid{
+
+    display:grid;
+
+    gap:24px;
+
+}
+
+.grid-2{
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+}
+
+.grid-3{
+
+    grid-template-columns:
+
+        repeat(3,1fr);
+
+}
+
+.grid-4{
+
+    grid-template-columns:
+
+        repeat(4,1fr);
+
+}
+
+/* ===========================================================
+   ROW
+=========================================================== */
+
+.row-flex{
+
+    display:flex;
+
+    gap:24px;
+
+}
+
+.column{
+
+    flex:1;
+
+}
+
+/* ===========================================================
+   CARD CONTAINER
+=========================================================== */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(4,1fr);
+
+    gap:24px;
+
+}
+
+/* ===========================================================
+   SECTION
+=========================================================== */
+
+.section{
+
+    margin-top:24px;
+
+}
+
+.section-title{
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:var(--heading-color);
+
+    margin-bottom:18px;
+
+}
+
+/* ===========================================================
+   FOOTER
+=========================================================== */
+
+.footer{
+
+    padding:20px;
+
+    text-align:center;
+
+    color:var(--text-light);
+
+    font-size:13px;
+
+}
+
+/* ===========================================================
+   LOADING
+=========================================================== */
+
+.loading-page{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:100%;
+
+    min-height:300px;
+
+}
+
+/* ===========================================================
+   EMPTY STATE
+=========================================================== */
+
+.empty{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:60px;
+
+    color:var(--text-light);
+
+}
+
+.empty h4{
+
+    margin-top:16px;
+
+}
+
+.empty p{
+
+    margin-top:6px;
+
+}
+
+/* ===========================================================
+   FADE
+=========================================================== */
+
+@keyframes fadePage{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(12px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+/* ===========================================================
+   RESPONSIVE 1400
+=========================================================== */
+
+@media(max-width:1400px){
+
+    .cards{
+
+        grid-template-columns:
+
+            repeat(2,1fr);
+
+    }
+
+}
+
+/* ===========================================================
+   RESPONSIVE 1200
+=========================================================== */
+
+@media(max-width:1200px){
+
+    .grid-4{
+
+        grid-template-columns:
+
+            repeat(2,1fr);
+
+    }
+
+    .grid-3{
+
+        grid-template-columns:
+
+            repeat(2,1fr);
+
+    }
+
+}
+
+/* ===========================================================
+   RESPONSIVE 992
+=========================================================== */
+
+@media(max-width:992px){
+
+    .main{
+
+        margin-left:0;
+
+    }
+
+    .cards{
+
+        grid-template-columns:
+
+            repeat(2,1fr);
+
+    }
+
+    .grid-2,
+
+    .grid-3,
+
+    .grid-4{
+
+        grid-template-columns:
+
+            1fr;
+
+    }
+
+    .row-flex{
+
+        flex-direction:column;
+
+    }
+
+}
+
+/* ===========================================================
+   RESPONSIVE 768
+=========================================================== */
+
+@media(max-width:768px){
+
+    .content{
+
+        padding:18px;
+
+    }
+
+    .cards{
+
+        grid-template-columns:
+
+            1fr;
+
+    }
+
+    .page-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:16px;
+
+    }
+
+}
+
+/* ===========================================================
+   RESPONSIVE 576
+=========================================================== */
+
+@media(max-width:576px){
+
+    .content{
+
+        padding:14px;
+
+    }
+
+    .page-title{
+
+        font-size:24px;
+
+    }
+
+    .section-title{
+
+        font-size:16px;
+
+    }
+
+}
